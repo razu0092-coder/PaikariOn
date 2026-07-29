@@ -1,14 +1,14 @@
 workflows:
   android-workflow:
-    name: Android Build Workflow
+    name: Native Android Build Workflow
     max_build_duration: 60
     instance_type: mac_mini_m1
     scripts:
-      - name: Get Flutter packages
+      - name: Set execution permission for gradlew
         script: |
-          flutter packages pub get
+          chmod +x gradlew
       - name: Build Android APK
         script: |
-          flutter build apk --release
+          ./gradlew assembleRelease
     artifacts:
-      - build/**/outputs/**/*.apk
+      - app/build/outputs/apk/release/*.apk
